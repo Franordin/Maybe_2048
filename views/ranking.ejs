@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임 기록</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>게임 기록</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>index</th>
+                <th>닉네임</th>
+                <th>점수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (games.length === 0) { %>
+                <tr>
+                    <td colspan="2">No records found</td>
+                </tr>
+            <% } else { %>
+                <% for (game of games) { %>
+                    <tr>
+                        <td><%= game.id %></td>
+                        <td><%= game.nickname %></td>
+                        <td><%= game.score %></td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>
+    <a href="/">홈으로 돌아가기</a>
+</body>
+
+</html>

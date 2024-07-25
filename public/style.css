@@ -1,0 +1,158 @@
+@charset "utf-8";
+
+:root {
+    --bg: #EEF1F7;
+    --font: Arial;
+    --fSize: 7.5vmin;
+
+    --bdr: min(12px, 2vmin);
+
+    --grid-bg: rgb(218, 222, 233);
+    --cell-bg: rgb(168, 174, 191);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3vmin;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: var(--font);
+    font-size: var(--fSize);
+}
+
+h1 {
+    font-size: 3vmin;
+}
+
+.title {
+    text-align: center;
+    font-size: 5vmin;
+    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+#score {
+    color: hsl(200, 25%, 50%);
+}
+
+#game-board {
+    /* --grid-size:4;
+    --cell-size:15vmin;
+    --cell-gap:1.5vmin; */
+    display: grid;
+    overflow: hidden;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    grid-gap: var(--cell-gap);
+    position: relative;
+    padding: var(--cell-gap);
+    background-color: var(--grid-bg);
+    border-radius: var(--bdr);
+}
+
+.cell {
+    background: var(--cell-bg);
+    border-radius: var(--bdr);
+}
+
+.tile {
+    /* --x:0; --y:0; */
+    /* --cell-bg-lightness:20%; */
+    /* --cell-text-lightness:80%; */
+    position: absolute;
+    width: var(--cell-size);
+    aspect-ratio: 1/1;
+    border-radius: var(--bdr);
+    text-align: center;
+    line-height: var(--cell-size);
+    font-weight: bold;
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    background: hsl(200, 50%, var(--cell-bg-lightness));
+    color: hsl(200, 25%, var(--cell-text-lightness));
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, .2);
+}
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    /* 모달 창을 블러 효과보다 앞에 보이게 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    z-index: 1001;
+    /* 모달 내용이 모달 배경보다 앞에 보이게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.text-gameover {
+    text-align: center;
+    font-size: 5vmin;
+    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.text-final-score {
+    text-align: center;
+    font-size: 5vmin;
+    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Blur Background when Modal is Active */
+body.modal-open #game-board,
+body.modal-open #score,
+body.modal-open .title {
+    filter: blur(5px);
+    pointer-events: none;
+    /* 모달이 열렸을 때 게임 보드와 점수 요소 클릭 방지 */
+}
+
+
+@keyframes show {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
