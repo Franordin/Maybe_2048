@@ -125,7 +125,7 @@ export default class Play {
     get score() { return this.#SCORE; }
     set score(num) {
         this.#SCORE = num;
-        this.$score.textContent = this.#SCORE;
+        // this.$score.textContent = this.#SCORE;
     }
 
     showGameOverModal() {
