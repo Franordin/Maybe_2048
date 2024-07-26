@@ -35,17 +35,43 @@ h1 {
     font-size: 3vmin;
 }
 
+.container {
+    display: grid;
+    width: 100;
+    height: 100%;
+    grid-template-areas: "title upgrade"
+        "score upgrade"
+        "board upgrade";
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 193px 196px 1fr;
+}
+
 .title {
-    text-align: center;
-    font-size: 5vmin;
+    grid-area: Title;
+    text-align: left;
+    font-size: 7vmin;
+    background: linear-gradient(to bottom, #FF7AAD, #FDC4DA);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.title-upper {
+    font-size: 4vmin;
     background: linear-gradient(to top, #FF7AAD, #FDC4DA);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
 }
 
-#score {
+#Score {
     color: hsl(200, 25%, 50%);
+    grid-area: score;
+    vertical-align: middle;
+}
+
+.upgrade {
+    grid-area: upgrade;
 }
 
 #game-board {
@@ -61,6 +87,7 @@ h1 {
     padding: var(--cell-gap);
     background-color: var(--grid-bg);
     border-radius: var(--bdr);
+    grid-area: board;
 }
 
 .cell {
@@ -85,7 +112,7 @@ h1 {
     color: hsl(200, 25%, var(--cell-text-lightness));
     animation: show 200ms ease-in-out;
     transition: 100ms ease-in-out;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, .2);
+    /* box-shadow: 2px 2px 0 rgba(0, 0, 0, .2); */
 }
 
 /* Modal Background */
@@ -138,7 +165,8 @@ h1 {
 /* Blur Background when Modal is Active */
 body.modal-open #game-board,
 body.modal-open #score,
-body.modal-open .title {
+body.modal-open .title,
+body.modal-open .title-upper {
     filter: blur(5px);
     pointer-events: none;
     /* 모달이 열렸을 때 게임 보드와 점수 요소 클릭 방지 */
