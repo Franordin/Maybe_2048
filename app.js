@@ -20,7 +20,12 @@ const Games = sequelize.define('Games', {
 
 const app = express();
 const PORT = 3030;
-app.use(express.urlencoded({ extended: true }));
+const HOST = '0.0.0.0'; // 모든 IP 주소에서 접근 가능
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
+});
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
