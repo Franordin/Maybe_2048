@@ -165,29 +165,42 @@
             </tr>
         </thead>
         <tbody>
-            <% if (games.length===0) { %>
+            <% 
+            if (games.length === 0) { %>
                 <tr>
                     <td colspan="3">No records found</td>
                 </tr>
-                <% } else { // 점수(score) 값에 따라 내림차순으로 정렬
-                    games.sort((a, b)=> b.score - a.score);
-                    let rank = 1;
-                    %>
-                    <% for (game of games) { %>
-                        <tr>
-                            <td>
-                                <%= rank %>
-                            </td>
-                            <td>
-                                <%= game.nickname %>
-                            </td>
-                            <td>
-                                <%= game.score %>
-                            </td>
-                        </tr>
-                        <% rank++; %>
-                            <% } %>
-                                <% } %>
+            <% } else {
+                // 닉네임별 최고 점수를 찾기 위한 객체 생성
+                const highestScores = {};
+                
+                // 최고 점수 계산
+                for (const game of games) {
+                    if (!highestScores[game.nickname] || highestScores[game.nickname] < game.score) {
+                        highestScores[game.nickname] = game.score;
+                    }
+                }
+                
+                // 최고 점수만으로 새로운 배열 생성
+                const uniqueGames = Object.keys(highestScores).map(nickname => ({
+                    nickname: nickname,
+                    score: highestScores[nickname]
+                }));
+                
+                // 점수(score) 값에 따라 내림차순으로 정렬
+                uniqueGames.sort((a, b) => b.score - a.score);
+                
+                let rank = 1;
+            %>
+                <% for (const game of uniqueGames) { %>
+                    <tr>
+                        <td><%= rank %></td>
+                        <td><%= game.nickname %></td>
+                        <td><%= game.score %></td>
+                    </tr>
+                    <% rank++; %>
+                <% } %>
+            <% } %>
         </tbody>
     </table>
 </body>
