@@ -26,76 +26,75 @@ export default class Play {
 
         // 모달 초기 상태 설정
         this.$modal.style.display = 'none';
-        
-        // 터치 이벤트 핸들러 설정
+
+        // Touch event properties
         this.touchStartX = 0;
         this.touchStartY = 0;
         this.touchEndX = 0;
         this.touchEndY = 0;
-        this.setupTouchEvents();
+
+        // Add touch event listeners
+        this.addTouchListeners();
     }
 
-    setupInput() {
-        window.addEventListener('keydown', this.handler.bind(this), { once: true });
+    addTouchListeners() {
+        window.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+        window.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: true });
+        window.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
     }
 
-    setupTouchEvents() {
-        this.$board.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.touches[0].clientX;
-            this.touchStartY = e.touches[0].clientY;
-        });
-
-        this.$board.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].clientX;
-            this.touchEndY = e.changedTouches[0].clientY;
-            this.handleSwipe();
-        });
+    handleTouchStart(event) {
+        this.touchStartX = event.changedTouches[0].screenX;
+        this.touchStartY = event.changedTouches[0].screenY;
     }
 
-    handleSwipe() {
-        const swipeThreshold = 50;
-        const xDiff = this.touchEndX - this.touchStartX;
-        const yDiff = this.touchEndY - this.touchStartY;
+    handleTouchMove(event) {
+        this.touchEndX = event.changedTouches[0].screenX;
+        this.touchEndY = event.changedTouches[0].screenY;
+    }
 
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            // Horizontal swipe
-            if (xDiff > swipeThreshold) {
-                this.handleArrowKey('right');
-            } else if (xDiff < -swipeThreshold) {
-                this.handleArrowKey('left');
+    handleTouchEnd() {
+        const dx = this.touchEndX - this.touchStartX;
+        const dy = this.touchEndY - this.touchStartY;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) {
+                this.handleSwipe(this.KEYS.right);
+            } else {
+                this.handleSwipe(this.KEYS.left);
             }
         } else {
-            // Vertical swipe
-            if (yDiff > swipeThreshold) {
-                this.handleArrowKey('down');
-            } else if (yDiff < -swipeThreshold) {
-                this.handleArrowKey('up');
+            if (dy > 0) {
+                this.handleSwipe(this.KEYS.down);
+            } else {
+                this.handleSwipe(this.KEYS.up);
             }
         }
     }
 
-    handleArrowKey(direction) {
-        switch (direction) {
-            case 'up':
+    handleSwipe(key) {
+        switch (key) {
+            case this.KEYS.up:
                 if (!this.canMoveUp()) { this.setupInput(); return; }
-                this.moveUp().then(() => this.afterMove());
+                this.moveUp();
                 break;
-            case 'down':
+            case this.KEYS.down:
                 if (!this.canMoveDown()) { this.setupInput(); return; }
-                this.moveDown().then(() => this.afterMove());
+                this.moveDown();
                 break;
-            case 'left':
+            case this.KEYS.left:
                 if (!this.canMoveLeft()) { this.setupInput(); return; }
-                this.moveLeft().then(() => this.afterMove());
+                this.moveLeft();
                 break;
-            case 'right':
+            case this.KEYS.right:
                 if (!this.canMoveRight()) { this.setupInput(); return; }
-                this.moveRight().then(() => this.afterMove());
+                this.moveRight();
                 break;
+            default:
+                this.setupInput();
+                return;
         }
-    }
 
-    afterMove() {
         this.GRID.cells.forEach($cell => $cell.mergeTiles(this));
 
         const newTile = new Tile(this.$board);
@@ -109,6 +108,14 @@ export default class Play {
         }
 
         this.setupInput();
+    }
+
+    setupInput() {
+        window.addEventListener('keydown', this.handler.bind(this), { once: true });
+    }
+
+    handler = async (e) => {
+        this.handleSwipe(e.key);
     }
 
     canMove(cells) {
