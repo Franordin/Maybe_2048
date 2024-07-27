@@ -26,38 +26,76 @@ export default class Play {
 
         // 모달 초기 상태 설정
         this.$modal.style.display = 'none';
+        
+        // 터치 이벤트 핸들러 설정
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.touchEndX = 0;
+        this.touchEndY = 0;
+        this.setupTouchEvents();
     }
 
     setupInput() {
-        // this.showGameOverModal();
         window.addEventListener('keydown', this.handler.bind(this), { once: true });
     }
 
-    handler = async (e) => {
-        const { up, down, left, right } = this.KEYS;
+    setupTouchEvents() {
+        this.$board.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+        });
 
-        switch (e.key) {
-            case up:
-                if (!this.canMoveUp()) { this.setupInput(); return; }
-                await this.moveUp();
-                break;
-            case down:
-                if (!this.canMoveDown()) { this.setupInput(); return; }
-                await this.moveDown();
-                break;
-            case left:
-                if (!this.canMoveLeft()) { this.setupInput(); return; }
-                await this.moveLeft();
-                break;
-            case right:
-                if (!this.canMoveRight()) { this.setupInput(); return; }
-                await this.moveRight();
-                break;
-            default:
-                this.setupInput();
-                return;
+        this.$board.addEventListener('touchend', (e) => {
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.touchEndY = e.changedTouches[0].clientY;
+            this.handleSwipe();
+        });
+    }
+
+    handleSwipe() {
+        const swipeThreshold = 50;
+        const xDiff = this.touchEndX - this.touchStartX;
+        const yDiff = this.touchEndY - this.touchStartY;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            // Horizontal swipe
+            if (xDiff > swipeThreshold) {
+                this.handleArrowKey('right');
+            } else if (xDiff < -swipeThreshold) {
+                this.handleArrowKey('left');
+            }
+        } else {
+            // Vertical swipe
+            if (yDiff > swipeThreshold) {
+                this.handleArrowKey('down');
+            } else if (yDiff < -swipeThreshold) {
+                this.handleArrowKey('up');
+            }
         }
+    }
 
+    handleArrowKey(direction) {
+        switch (direction) {
+            case 'up':
+                if (!this.canMoveUp()) { this.setupInput(); return; }
+                this.moveUp().then(() => this.afterMove());
+                break;
+            case 'down':
+                if (!this.canMoveDown()) { this.setupInput(); return; }
+                this.moveDown().then(() => this.afterMove());
+                break;
+            case 'left':
+                if (!this.canMoveLeft()) { this.setupInput(); return; }
+                this.moveLeft().then(() => this.afterMove());
+                break;
+            case 'right':
+                if (!this.canMoveRight()) { this.setupInput(); return; }
+                this.moveRight().then(() => this.afterMove());
+                break;
+        }
+    }
+
+    afterMove() {
         this.GRID.cells.forEach($cell => $cell.mergeTiles(this));
 
         const newTile = new Tile(this.$board);

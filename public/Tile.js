@@ -53,7 +53,7 @@ export default class Tile {
     set value(vnum) {
         // 숫자 설정
         this.#VALUE = vnum;
-        // this.#TILE.textContent = vnum;
+        this.#TILE.textContent = vnum;
     
         // 배경색 및 글씨색
         // const power = Math.log2(vnum);
