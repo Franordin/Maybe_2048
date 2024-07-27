@@ -49,7 +49,8 @@ app.post('/register', async (req, res) => {
     if (nickname) {
         try {
             await Games.create({ nickname, score });
-            // res.redirect('/');
+            const games = await Games.findAll();
+            res.render('ranking', { games });
         } catch (error) {
             console.error('Error creating game record:', error);
             res.status(500).send('Internal Server Error');

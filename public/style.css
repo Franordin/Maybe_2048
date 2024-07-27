@@ -48,8 +48,8 @@ h1 {
     grid-template-areas: "title upgrade"
         "score upgrade"
         "board upgrade";
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 193px 196px 1fr;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 0.1 0.1 1fr;
 }
 
 .title {
@@ -111,7 +111,7 @@ h1 {
     font-weight: bold;
     left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
     top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
-    background: hsl(200, 50%, var(--cell-bg-lightness));
+    background: #F6F6F6;
     color: hsl(200, 25%, var(--cell-text-lightness));
     animation: show 200ms ease-in-out;
     transition: 100ms ease-in-out;

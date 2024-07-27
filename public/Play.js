@@ -150,17 +150,19 @@ export default class Play {
                 if (response.ok) {
                     this.$modal.style.display = 'none';
                     document.body.classList.remove('modal-open');
-                    window.location.href = '/ranking';
+    
+                    // 랭킹 페이지로 이동
+                    window.location.href = '/ranking'; // 이 경로는 실제 랭킹 페이지의 경로로 수정해야 합니다.
                 } else {
-                    console.error('Failed to submit score');
-                    alert('Failed to submit score. Please try again.');
+                    console.error('점수 제출 실패');
+                    alert('점수 제출에 실패했습니다. 다시 시도해 주세요.');
                 }
             } catch (error) {
-                console.error('Error submitting score:', error);
-                alert('Error submitting score. Please try again.');
+                console.error('점수 제출 중 오류 발생:', error);
+                alert('점수 제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
             }
         } else {
-            alert('Please enter a nickname.');
+            alert('닉네임을 입력해 주세요.');
         }
     }
 }

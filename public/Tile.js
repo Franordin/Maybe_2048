@@ -1,5 +1,5 @@
-const bgColor = "--cell-bg-lightness";
-const txtColor = "--cell-text-lightness";
+// const bgColor = "--cell-bg-lightness";
+// const txtColor = "--cell-text-lightness";
 
 const tileImages = {
     2: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcOcnc0%2FbtsINL0U6I9%2FfhKOvzEaKkV17X3dOlAE6K%2Fimg.png',
@@ -8,11 +8,12 @@ const tileImages = {
     16: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FxYWMB%2FbtsIPMYfeux%2FOnmmogrwKLSvgXB3LJpyi1%2Fimg.png',
     32: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb2EBu4%2FbtsIPTv6SCG%2FKedWGGpXMRHUWdxsRl2N0K%2Fimg.png',
     64: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLhFPo%2FbtsINs8g0sW%2FLVBW8rAgRHSuvBrfHPyh40%2Fimg.png',
-    128: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcs49yp%2FbtsIOFyMwPr%2Fu2Qw3Jk2faUKEU45uKi8qK%2Fimg.png',
-    256: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FP8kyZ%2FbtsIOTjiTRd%2FSEuyHhcEghBKH5ceHLFP2K%2Fimg.png',
-    512: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3Uaop%2FbtsINNqSZvO%2FyPfJO71Vrv2fBieG9gqNHK%2Fimg.png',
-    1024: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FuGIG6%2FbtsIOqIDfeE%2FeVBmNxDJE7cargJRBRwJlk%2Fimg.png',
-    2048: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fn7fjj%2FbtsINVCjEGt%2FqK18QOxAbe3goA7CUuaMk0%2Fimg.png',
+    128: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FA4tQT%2FbtsINuruho1%2FBqlpqsIuTzKN1Ym1KyOW9K%2Fimg.png',
+    256: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcs49yp%2FbtsIOFyMwPr%2Fu2Qw3Jk2faUKEU45uKi8qK%2Fimg.png',
+    512: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FP8kyZ%2FbtsIOTjiTRd%2FSEuyHhcEghBKH5ceHLFP2K%2Fimg.png',
+    1024: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3Uaop%2FbtsINNqSZvO%2FyPfJO71Vrv2fBieG9gqNHK%2Fimg.png',
+    2048: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FuGIG6%2FbtsIOqIDfeE%2FeVBmNxDJE7cargJRBRwJlk%2Fimg.png',
+    4096: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fn7fjj%2FbtsINVCjEGt%2FqK18QOxAbe3goA7CUuaMk0%2Fimg.png',
 };
 
 
@@ -55,11 +56,11 @@ export default class Tile {
         // this.#TILE.textContent = vnum;
     
         // 배경색 및 글씨색
-        const power = Math.log2(vnum);
-        const bgLight = 100 - (power * 9);
+        // const power = Math.log2(vnum);
+        // const bgLight = 100 - (power * 9);
     
-        this.#TILE.style.setProperty(bgColor, `${bgLight}%`);
-        this.#TILE.style.setProperty(txtColor, `${bgLight <= 50 ? 90 : 10}%`);
+        // this.#TILE.style.setProperty(bgColor, `${bgLight}%`);
+        // this.#TILE.style.setProperty(txtColor, `${bgLight <= 50 ? 90 : 10}%`);
     
         // 배경 이미지 설정
         if (tileImages[vnum]) {
