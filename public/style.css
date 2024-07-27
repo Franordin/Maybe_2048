@@ -29,7 +29,6 @@ body {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    gap: 3vmin;
     width: 100%;
     min-height: 100vh;
     background: var(--bg);
@@ -51,22 +50,6 @@ h1 {
     grid-template-rows: 0.1fr 0.1fr 1fr;
 }
 
-@media only screen and (max-width: 768px) {
-    .upgrade {
-        display: none;
-    }
-
-    .container {
-        display: grid;
-        height: 80%;
-        grid-template-areas:
-            "title"
-            "score"
-            "board";
-        /* grid-template-rows: auto auto 1fr; */
-        grid-template-columns: 1fr;
-    }
-}
 
 .title {
     grid-area: Title;
@@ -97,9 +80,9 @@ h1 {
 }
 
 #game-board {
-    /* --grid-size:4;
-    --cell-size:15vmin;
-    --cell-gap:1.5vmin; */
+    --grid-size: 4;
+    --cell-size: 15vmin;
+    --cell-gap: 1.5vmin;
     display: grid;
     overflow: hidden;
     grid-template-columns: repeat(var(--grid-size), var(--cell-size));
@@ -122,7 +105,8 @@ h1 {
     width: var(--cell-size);
     aspect-ratio: 1/1;
     border-radius: var(--bdr);
-    text-align: right; /* 오른쪽 정렬 */
+    text-align: right;
+    /* 오른쪽 정렬 */
     font-size: 4vmin;
     /* line-height: var(--cell-size); 텍스트의 수직 정렬을 도와줍니다 */
     font-weight: bold;
@@ -133,7 +117,8 @@ h1 {
     animation: show 200ms ease-in-out;
     transition: 100ms ease-in-out;
     /* box-shadow: 2px 2px 0 rgba(0, 0, 0, .2); */
-    padding: 0 5px 5px 0; /* 상단과 오른쪽에 패딩 추가 */
+    padding: 0 5px 5px 0;
+    /* 상단과 오른쪽에 패딩 추가 */
 }
 
 /* Modal Background */
@@ -157,9 +142,9 @@ h1 {
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    z-index: 1001;
+    /* width: 100%; */
+    max-width: 800px;
+    /* z-index: 1001; */
     /* 모달 내용이 모달 배경보다 앞에 보이게 */
     text-align: center;
     border-radius: 15px;
@@ -167,14 +152,15 @@ h1 {
 
 .text-gameover {
     text-align: center;
-    font-size: 5vmin;
+    font-size: 1.5em;
     color: #B1AFFF;
 }
 
 .text-final-score {
     text-align: center;
-    font-size: 4vmin;
+    font-size: 1.2em;
     color: #B1AFFF;
+    padding-bottom: 30px;
 }
 
 /* Blur Background when Modal is Active */
@@ -194,6 +180,7 @@ body.modal-open .title-upper {
     border-bottom: 2px solid #B1AFFF;
     height: 30px;
     width: 50%;
+    font-size: small;
 }
 
 .form-control:valid {
@@ -206,6 +193,26 @@ body.modal-open .title-upper {
     background: #B1AFFF;
 }
 
+@media only screen and (max-width: 980px) {
+    .upgrade {
+        display: none;
+    }
+
+    .container {
+        display: grid;
+        /* height: 100%; */
+        grid-template-areas:
+            "title"
+            "score"
+            "board";
+        grid-template-columns: 0.1fr;
+    }
+
+    #game-board {
+        --cell-size: 20vmin !important;
+        --cell-gap: 1.6vmin !important;
+    }
+}
 
 @keyframes show {
     from {

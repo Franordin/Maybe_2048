@@ -111,6 +111,7 @@ export default class Play {
     }
 
     setupInput() {
+        // this.showGameOverModal();
         window.addEventListener('keydown', this.handler.bind(this), { once: true });
     }
 
