@@ -2,7 +2,6 @@
 
 :root {
     --bg: #EEF1F7;
-    --font: Arial;
     --fSize: 7.5vmin;
 
     --bdr: min(12px, 2vmin);
@@ -17,6 +16,13 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body {
     display: flex;
@@ -27,7 +33,7 @@ body {
     width: 100%;
     min-height: 100vh;
     background: var(--bg);
-    font-family: var(--font);
+    font-family: 'MaplestoryOTFBold';
     font-size: var(--fSize);
 }
 
@@ -50,7 +56,7 @@ h1 {
     grid-area: Title;
     text-align: left;
     font-size: 7vmin;
-    background: linear-gradient(to bottom, #FF7AAD, #FDC4DA);
+    background: linear-gradient(to bottom, #B1AFFF, #c2c0ff);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -58,7 +64,7 @@ h1 {
 
 .title-upper {
     font-size: 4vmin;
-    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
+    background: linear-gradient(to top, #B1AFFF, #c2c0ff);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -96,9 +102,6 @@ h1 {
 }
 
 .tile {
-    /* --x:0; --y:0; */
-    /* --cell-bg-lightness:20%; */
-    /* --cell-text-lightness:80%; */
     position: absolute;
     width: var(--cell-size);
     aspect-ratio: 1/1;
@@ -140,36 +143,49 @@ h1 {
     max-width: 500px;
     z-index: 1001;
     /* 모달 내용이 모달 배경보다 앞에 보이게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    border-radius: 15px;
 }
 
 .text-gameover {
     text-align: center;
     font-size: 5vmin;
-    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: #B1AFFF;
 }
 
 .text-final-score {
     text-align: center;
-    font-size: 5vmin;
-    background: linear-gradient(to top, #FF7AAD, #FDC4DA);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+    font-size: 4vmin;
+    color: #B1AFFF;
 }
 
 /* Blur Background when Modal is Active */
 body.modal-open #game-board,
 body.modal-open #score,
+body.modal-open .upgrade,
 body.modal-open .title,
 body.modal-open .title-upper {
     filter: blur(5px);
     pointer-events: none;
     /* 모달이 열렸을 때 게임 보드와 점수 요소 클릭 방지 */
+}
+
+.form-control {
+    border-radius: 0px !important;
+    border: 0px;
+    border-bottom: 2px solid #B1AFFF;
+    height: 30px;
+    width: 50%;
+}
+
+.form-control:valid {
+    border-color: #B1AFFF !important;
+}
+
+.btnLightBlue {
+    width: 70px;
+    height: 30px;
+    background: #B1AFFF;
 }
 
 

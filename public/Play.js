@@ -29,6 +29,7 @@ export default class Play {
     }
 
     setupInput() {
+        // this.showGameOverModal();
         window.addEventListener('keydown', this.handler.bind(this), { once: true });
     }
 
@@ -147,9 +148,9 @@ export default class Play {
                     }),
                 });
                 if (response.ok) {
-                    console.log('Score submitted successfully');
                     this.$modal.style.display = 'none';
                     document.body.classList.remove('modal-open');
+                    window.location.href = '/ranking';
                 } else {
                     console.error('Failed to submit score');
                     alert('Failed to submit score. Please try again.');

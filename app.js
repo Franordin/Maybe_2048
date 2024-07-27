@@ -49,7 +49,7 @@ app.post('/register', async (req, res) => {
     if (nickname) {
         try {
             await Games.create({ nickname, score });
-            res.redirect('/');
+            // res.redirect('/');
         } catch (error) {
             console.error('Error creating game record:', error);
             res.status(500).send('Internal Server Error');
@@ -63,15 +63,9 @@ app.post('/register', async (req, res) => {
 app.get('/ranking', async (req, res) => {
     try {
         const games = await Games.findAll();
-        console.log(games); // 데이터 확인
         res.render('ranking', { games });
     } catch (error) {
         console.error('Error fetching games:', error);
         res.status(500).send('Internal Server Error');
     }
-});
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
 });

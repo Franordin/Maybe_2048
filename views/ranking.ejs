@@ -5,67 +5,191 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게임 기록</title>
+    <title>Ranking</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
+        @font-face {
+            font-family: 'MaplestoryOTFBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+
+        body {
+            font-family: 'MaplestoryOTFBold';
+            font-weight: 300;
+            line-height: 1.42em;
+            color: rgb(32, 32, 32);
+            background-color: #EEF1F7;
         }
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
+
+        h1 {
+            font-size: 5em;
+            font-weight: 300;
+            line-height: 1em;
+            text-align: center;
+            background: linear-gradient(to bottom, #B1AFFF, #c2c0ff);
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+
+        h2 {
+            font-size: 1em;
+            font-weight: 300;
+            text-align: center;
+            display: block;
+            line-height: 1em;
+            padding-bottom: 2em;
+            color: #FB667A;
         }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
+
+        h2 a {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #FB667A;
             text-decoration: none;
-            color: #007bff;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .blue {
+            color: #185875;
+        }
+
+        .yellow {
+            color: #FFF842;
+        }
+
+        .container th h1 {
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: left;
+            color: black;
+        }
+
+        .container td {
+            font-weight: normal;
+            font-size: 1.3em;
+            -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+            -moz-box-shadow: 0 2px 2px -2px #0E1119;
+            box-shadow: 0 2px 2px -2px #0E1119;
+        }
+
+        .container {
+            text-align: left;
+            overflow: hidden;
+            width: 80%;
+            margin: 0 auto;
+            display: table;
+            padding: 0 0 8em 0;
+        }
+
+        .container td,
+        .container th {
+            padding-bottom: 2%;
+            padding-top: 2%;
+            padding-left: 2%;
+        }
+
+        /* Background-color of the odd rows */
+        .container tr:nth-child(odd) {
+            background-color: rgb(218, 222, 233);
+            ;
+        }
+
+        /* Background-color of the even rows */
+        .container tr:nth-child(even) {
+            background-color: rgb(168, 174, 191);
+        }
+
+        .container th {
+            background-color: rgb(168, 174, 191);
+        }
+
+        .container td:first-child {
+            color: #FB667A;
+        }
+
+        .container tr:hover {
+            background-color: #464A52;
+            -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+            -moz-box-shadow: 0 6px 6px -6px #0E1119;
+            box-shadow: 0 6px 6px -6px #0E1119;
+        }
+
+        .container td:hover {
+            background-color: #fffec1;
+            color: #403E10;
+            font-weight: bold;
+
+            box-shadow: #c7c34d -1px 1px, #c7c34d -2px 2px, #c7c34d -3px 3px, #c7c34d -4px 4px, #c7c34d -5px 5px, #c7c34d -6px 6px;
+            transform: translate3d(6px, -6px, 0);
+
+            transition-delay: 0s;
+            transition-duration: 0.4s;
+            transition-property: all;
+            transition-timing-function: line;
+        }
+
+        @media (max-width: 800px) {
+
+            .container td:nth-child(4),
+            .container th:nth-child(4) {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1>게임 기록</h1>
-    <table>
+    <h1>Ranking</h1>
+    <h3 style="text-align: center;">
+        <a href="/">게임으로 돌아가기</a>
+    </h3>
+
+    <table class="container">
+        <colgroup>
+            <col width="20%" />
+            <col width="40%" />
+            <col width="40%" />
+        </colgroup>
         <thead>
             <tr>
-                <th>index</th>
-                <th>닉네임</th>
-                <th>점수</th>
+                <th>
+                    <h1>Rank</h1>
+                </th>
+                <th>
+                    <h1>닉네임</h1>
+                </th>
+                <th>
+                    <h1>점수</h1>
+                </th>
             </tr>
         </thead>
         <tbody>
-            <% if (games.length === 0) { %>
+            <% if (games.length===0) { %>
                 <tr>
-                    <td colspan="2">No records found</td>
+                    <td colspan="3">No records found</td>
                 </tr>
-            <% } else { %>
-                <% for (game of games) { %>
-                    <tr>
-                        <td><%= game.id %></td>
-                        <td><%= game.nickname %></td>
-                        <td><%= game.score %></td>
-                    </tr>
-                <% } %>
-            <% } %>
+                <% } else { // 점수(score) 값에 따라 내림차순으로 정렬
+                    games.sort((a, b)=> b.score - a.score);
+                    let rank = 1;
+                    %>
+                    <% for (game of games) { %>
+                        <tr>
+                            <td>
+                                <%= rank %>
+                            </td>
+                            <td>
+                                <%= game.nickname %>
+                            </td>
+                            <td>
+                                <%= game.score %>
+                            </td>
+                        </tr>
+                        <% rank++; %>
+                            <% } %>
+                                <% } %>
         </tbody>
     </table>
-    <a href="/">홈으로 돌아가기</a>
 </body>
 
 </html>
