@@ -11,8 +11,8 @@ const tileImages = {
     128: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FA4tQT%2FbtsINuruho1%2FBqlpqsIuTzKN1Ym1KyOW9K%2Fimg.png',
     256: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcs49yp%2FbtsIOFyMwPr%2Fu2Qw3Jk2faUKEU45uKi8qK%2Fimg.png',
     512: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FP8kyZ%2FbtsIOTjiTRd%2FSEuyHhcEghBKH5ceHLFP2K%2Fimg.png',
-    1024: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3Uaop%2FbtsINNqSZvO%2FyPfJO71Vrv2fBieG9gqNHK%2Fimg.png',
-    2048: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FuGIG6%2FbtsIOqIDfeE%2FeVBmNxDJE7cargJRBRwJlk%2Fimg.png',
+    1024: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FuGIG6%2FbtsIOqIDfeE%2FeVBmNxDJE7cargJRBRwJlk%2Fimg.png',
+    2048: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcudVV1%2FbtsIQZX2qRz%2FB5pBxBOc30JdBFPGJVjaV0%2Fimg.png',
     4096: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fn7fjj%2FbtsINVCjEGt%2FqK18QOxAbe3goA7CUuaMk0%2Fimg.png',
 };
 

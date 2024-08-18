@@ -70,3 +70,99 @@ app.get('/ranking', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.get('/azerty', (req, res) => {
+    res.render('azerty', { message: null });
+});
+
+app.get('/rankingall', async (req, res) => {
+    try {
+        const games = await Games.findAll();
+        res.render('rankingall', { games });
+    } catch (error) {
+        console.error('Error fetching games:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// 삭제 요청 처리
+app.post('/delete', async (req, res) => {
+    const { nickname } = req.body;
+
+    if (nickname) {
+        try {
+            // 닉네임에 해당하는 모든 게임 기록을 삭제
+            const initialCount = await Games.count({ where: { nickname } });
+            await Games.destroy({ where: { nickname } });
+
+            // 결과 메시지 생성
+            const message = {
+                type: initialCount > 0 ? 'success' : 'error',
+                text: initialCount > 0 ? 'Scores deleted successfully.' : 'No scores found for this nickname.',
+            };
+
+            res.render('azerty', { message });
+        } catch (error) {
+            console.error('Error deleting game records:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    } else {
+        res.status(400).send('Nickname is required');
+    }
+});
+
+// 닉네임 변경 요청 처리
+app.post('/rename', async (req, res) => {
+    const { oldNickname, newNickname } = req.body;
+
+    if (oldNickname && newNickname) {
+        try {
+            // 닉네임을 변경
+            const [updatedCount] = await Games.update(
+                { nickname: newNickname },
+                { where: { nickname: oldNickname } }
+            );
+
+            // 결과 메시지 생성
+            const message = {
+                type: updatedCount > 0 ? 'success' : 'error',
+                text: updatedCount > 0 ? 'Nickname updated successfully.' : 'No scores found for the old nickname.',
+            };
+
+            res.render('azerty', { message });
+        } catch (error) {
+            console.error('Error updating nickname:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    } else {
+        res.status(400).send('Both old and new nicknames are required');
+    }
+});
+
+app.post('/superegister', async (req, res) => {
+    const { nickname, score } = req.body;
+
+    if (nickname && score !== undefined) {
+        try {
+            await Games.create({ nickname, score });
+            const message = {
+                type: 'success',
+                text: 'Game record created successfully.',
+            };
+            res.render('azerty', { message });
+        } catch (error) {
+            console.error('Error creating game record:', error);
+            const message = {
+                type: 'error',
+                text: 'Internal Server Error. Could not create game record.',
+            };
+            res.render('azerty', { message });
+        }
+    } else {
+        const message = {
+            type: 'error',
+            text: 'Both nickname and score are required.',
+        };
+        res.render('azerty', { message });
+    }
+});

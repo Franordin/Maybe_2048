@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .message.success {
+            color: green;
+        }
+        .message.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Scores by Nickname</h1>
+        <form action="/delete" method="POST">
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Delete Scores</button>
+            </div>
+        </form>
+        
+        <h1>Rename Nickname</h1>
+        <form action="/rename" method="POST">
+            <div class="form-group">
+                <label for="oldNickname">기존 닉네임</label>
+                <input type="text" id="oldNickname" name="oldNickname" required>
+            </div>
+            <div class="form-group">
+                <label for="newNickname">새 닉네임</label>
+                <input type="text" id="newNickname" name="newNickname" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Rename Nickname</button>
+            </div>
+        </form>
+
+        <h1>Super Register</h1>
+        <form action="/superegister" method="POST">
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" required>
+            </div>
+            <div class="form-group">
+                <label for="score">점수</label>
+                <input type="number" id="score" name="score" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+
+        <% if (message) { %>
+            <div class="message <%= message.type %>">
+                <%= message.text %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
